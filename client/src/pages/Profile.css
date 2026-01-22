@@ -1,0 +1,306 @@
+/* Profile Page */
+.profile-page,
+.order-details-page {
+    padding: var(--spacing-3xl) 0;
+    min-height: 60vh;
+}
+
+.page-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+}
+
+.profile-grid {
+    display: grid;
+    gap: var(--spacing-2xl);
+    grid-template-columns: 300px 1fr;
+}
+
+.profile-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    height: fit-content;
+}
+
+.user-info-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-md);
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-3xl);
+    color: white;
+    font-weight: 700;
+}
+
+.user-name {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.user-email,
+.user-phone {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+/* Orders List */
+.orders-section {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+}
+
+.section-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.order-id {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+.order-date {
+    color: var(--color-text-muted);
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.status-pending {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+.status-confirmed {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.status-shipped {
+    background: rgba(139, 92, 246, 0.2);
+    color: #8b5cf6;
+}
+
+.status-delivered {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.status-cancelled {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.order-total {
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+}
+
+/* Order Details & Tracking */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.back-link {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+    width: 100%;
+}
+
+.tracking-container {
+    margin-bottom: var(--spacing-3xl);
+    padding: var(--spacing-xl);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+}
+
+.progress-track {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.progress-track::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-bg-tertiary);
+    z-index: 1;
+}
+
+.track-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+}
+
+.track-step::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -50%;
+    width: 100%;
+    height: 4px;
+    background: var(--color-primary);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.track-step.completed::after {
+    opacity: 1;
+}
+
+.track-step:first-child::after {
+    display: none;
+}
+
+.step-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color-bg-tertiary);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    transition: all 0.3s;
+}
+
+.track-step.completed .step-icon,
+.track-step.active .step-icon {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.step-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.track-step.completed .step-label,
+.track-step.active .step-label {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.order-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.order-items-card,
+.shipping-info-card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+}
+
+.order-item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.order-summary-footer {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 2px solid var(--glass-border);
+}
+
+.summary-row.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+
+    .profile-grid,
+    .order-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .order-info {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+
+    .step-label {
+        font-size: 10px;
+    }
+}

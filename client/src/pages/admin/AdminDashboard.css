@@ -1,0 +1,63 @@
+.admin-dashboard {
+    padding: var(--spacing-3xl) 0;
+    min-height: calc(100vh - 200px);
+}
+
+.admin-title {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.admin-welcome {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-3xl);
+    font-size: var(--font-size-lg);
+}
+
+.admin-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.admin-card {
+    padding: var(--spacing-2xl);
+    text-align: center;
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+.admin-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+}
+
+.admin-card-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-xl);
+    color: white;
+}
+
+.admin-card h3 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+
+.admin-card p {
+    color: var(--color-text-secondary);
+    margin: 0;
+}

@@ -1,0 +1,118 @@
+.order-management {
+    padding: var(--spacing-3xl) 0;
+    min-height: calc(100vh - 200px);
+}
+
+.order-management h1 {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.order-card {
+    padding: var(--spacing-xl);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.order-header h3 {
+    margin: 0 0 var(--spacing-sm);
+    font-size: var(--font-size-xl);
+}
+
+.order-date {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.order-status {
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+}
+
+.order-customer,
+.order-products {
+    margin-bottom: var(--spacing-lg);
+}
+
+.order-customer h4,
+.order-products h4 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+
+.order-customer p {
+    margin: var(--spacing-sm) 0;
+    color: var(--color-text-secondary);
+}
+
+.order-product-item {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+}
+
+.order-product-item img {
+    width: 60px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.order-product-details p {
+    margin: var(--spacing-xs) 0;
+    color: var(--color-text-secondary);
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+.order-total {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.order-actions select {
+    min-width: 150px;
+}
+
+@media (max-width: 768px) {
+    .order-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .order-footer {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: stretch;
+    }
+
+    .order-actions select {
+        width: 100%;
+    }
+}
