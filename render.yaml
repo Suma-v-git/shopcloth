@@ -18,9 +18,8 @@ services:
       - key: CLOUDINARY_API_SECRET
         fromConfig: true
 
-  - type: static
+  - type: static_site
     name: tatva-frontend
-    env: static
     buildCommand: cd client && npm install && npm run build
     publishPath: client/dist
     envVars:
