@@ -17,3 +17,20 @@ services:
         fromConfig: true
       - key: CLOUDINARY_API_SECRET
         fromConfig: true
+
+  - type: static
+    name: tatva-frontend
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    publishPath: client/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: tatva-backend
+          property: host
+        suffix: /api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
