@@ -147,25 +147,3 @@
     background: var(--color-bg-hover);
     transform: translateY(-1px);
 }
-
-.share-buttons {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.share-button-whatsapp {
-    color: #16a34a;
-}
-
-.share-button-whatsapp:hover {
-    color: #16a34a;
-}
-
-.share-button-instagram {
-    color: #db2777;
-}
-
-.share-button-instagram:hover {
-    color: #db2777;
-}

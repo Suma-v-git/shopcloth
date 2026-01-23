@@ -57,6 +57,31 @@ const ProductDetails = () => {
         setSelectedImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1));
     };
 
+    const handleShareClick = async () => {
+        const productUrl = window.location.href;
+        const shareMessage = `Check out this product on Tatva Fashion House: ${product.name}`;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: product.name,
+                    text: shareMessage,
+                    url: productUrl,
+                });
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(`${shareMessage} - ${productUrl}`);
+                setMessage('Product link copied to clipboard!');
+                setTimeout(() => setMessage(''), 3000);
+            } else {
+                alert(`${shareMessage} - ${productUrl}`);
+            }
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.error('Error sharing product:', error);
+            }
+        }
+    };
+
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
         setSubmittingReview(true);
@@ -159,7 +184,21 @@ const ProductDetails = () => {
 
                     {/* Product Info */}
                     <div className="product-info-section">
-                        <h1 className="product-title">{product.name}</h1>
+                        <div className="product-title-row">
+                            <h1 className="product-title">{product.name}</h1>
+                            <button
+                                className="share-btn-secondary"
+                                onClick={handleShareClick}
+                                aria-label="Share product"
+                                title="Share"
+                            >
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                                    <polyline points="16 6 12 2 8 6"></polyline>
+                                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                                </svg>
+                            </button>
+                        </div>
                         <p className="product-category">{product.category}</p>
                         <div className="product-price-row">
                             {product.originalPrice && product.originalPrice > product.price && (

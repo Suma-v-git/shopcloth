@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: tatva-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromConfig: true
+      - key: JWT_SECRET
+        fromConfig: true
+      - key: CLOUDINARY_CLOUD_NAME
+        fromConfig: true
+      - key: CLOUDINARY_API_KEY
+        fromConfig: true
+      - key: CLOUDINARY_API_SECRET
+        fromConfig: true

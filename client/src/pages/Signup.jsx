@@ -58,7 +58,7 @@ const Signup = () => {
             <div className="container container-sm">
                 <div className="auth-card card fade-in">
                     <h1 className="auth-title">Create Account</h1>
-                    <p className="auth-subtitle">Join ShopCloth today</p>
+                    <p className="auth-subtitle">Join Tatva Fashion House today</p>
 
                     {error && (
                         <div className="error-message">
@@ -111,7 +111,7 @@ const Signup = () => {
                                     id="phone"
                                     type="tel"
                                     className="input"
-                                    placeholder="9876543210"
+                                    placeholder="8722888444"
                                     maxLength="10"
                                     value={phone}
                                     onChange={(e) => {

@@ -38,6 +38,8 @@
   --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
   --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F1C40F 100%);
+  --color-gold: #D4AF37;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -451,6 +453,14 @@ select.input {
 }
 
 /* ===== TEXT UTILITIES ===== */
+.gold-text {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
 .text-center {
   text-align: center;
 }

@@ -4,7 +4,7 @@ import './ProductCard.css';
 const ProductCard = ({ product }) => {
     const displayId = product.productId || product._id;
     const productUrl = `${window.location.origin}/product/${product._id}`;
-    const shareMessage = `Check out this product on Shopcloth: ${product.name}`;
+    const shareMessage = `Check out this product on Tatva Fashion House: ${product.name}`;
 
     const handleShareClick = async (e) => {
         e.preventDefault();

@@ -18,10 +18,10 @@ const Home = () => {
     const [recentSearches, setRecentSearches] = useState([]);
     const searchRef = useRef(null);
 
-    const POPULAR_SEARCHES = [
-        'Saree', 'Shoes', 'Kurti', 'Short Kurti', 'Earring',
-        'Watch', 'Tshirt', 'Top', 'Slipper', 'Kurti Set',
-        'Blouse', 'Jacket'
+    const TOP_SEARCHES = [
+        'Suits', 'Blazers', 'Formal Shirts', 'Tuxedo', 'Leather Shoes',
+        'Cufflinks', 'Trousers', 'Premium T-shirts', 'Oversized Tees', 'Jackets',
+        'Denim', 'Luxury Watches'
     ];
 
     useEffect(() => {
@@ -117,10 +117,11 @@ const Home = () => {
                 <div className="container">
                     <div className="hero-content fade-in">
                         <h1 className="hero-title">
-                            Discover Your <span className="gradient-text">Perfect Style</span>
+                            <span className="gold-text">Tatva Fashion House</span>
                         </h1>
                         <p className="hero-subtitle">
-                            Premium fashion for everyone. Shop the latest trends in men's, women's, and kids' clothing.
+                            Where tradition meets modern style.<br />
+                            Discover premium men’s wear crafted for confidence, comfort, and class.
                         </p>
                         <div className="hero-actions">
                             <a href="#products" className="btn btn-primary btn-lg">
@@ -173,9 +174,9 @@ const Home = () => {
                                 )}
 
                                 <div className="suggestions-section">
-                                    <h4 className="suggestions-title">Popular Searches</h4>
+                                    <h4 className="suggestions-title">Top Searches</h4>
                                     <div className="popular-tags">
-                                        {POPULAR_SEARCHES.map((tag, index) => (
+                                        {TOP_SEARCHES.map((tag, index) => (
                                             <div
                                                 key={index}
                                                 className="popular-tag"
