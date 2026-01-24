@@ -87,14 +87,9 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Export app for serverless
-export default app;
-
 // Start server
-if (process.env.NODE_ENV !== 'production' || !process.env.LAMBDA_TASK_ROOT) {
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on port ${PORT}`);
-        console.log(`📡 API available at http://localhost:${PORT}/api`);
-    });
-}
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📡 API available at http://localhost:${PORT}/api`);
+});
