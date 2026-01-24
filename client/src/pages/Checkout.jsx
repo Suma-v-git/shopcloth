@@ -28,26 +28,97 @@ const Checkout = () => {
         });
     };
 
+    const loadRazorpay = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
+        const res = await loadRazorpay();
+
+        if (!res) {
+            setError('Razorpay SDK failed to load. Please check your connection.');
+            setLoading(false);
+            return;
+        }
+
         try {
-            const orderData = {
-                products: cart.map(item => ({
-                    productId: item.product._id,
-                    quantity: item.quantity,
-                    size: item.size
-                })),
-                shippingAddress: formData
+            // 1. Create payment order on backend
+            const { data: { order: razorpayOrder } } = await api.post('/payments/create-order', {
+                amount: getCartTotal()
+            });
+
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'your_razorpay_key_id',
+                amount: razorpayOrder.amount,
+                currency: 'INR',
+                name: 'Tatva Fashion House',
+                description: 'Payment for your order',
+                image: '/logo.png',
+                order_id: razorpayOrder.id,
+                handler: async (response) => {
+                    try {
+                        const orderData = {
+                            products: cart.map(item => ({
+                                productId: item.product._id,
+                                quantity: item.quantity,
+                                size: item.size
+                            })),
+                            shippingAddress: formData
+                        };
+
+                        // 2. Create the internal order
+                        const { data: { order: internalOrder } } = await api.post('/orders', orderData);
+
+                        // 3. Verify payment on backend
+                        const verificationData = {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            orderId: internalOrder._id
+                        };
+
+                        const verifyRes = await api.post('/payments/verify', verificationData);
+
+                        if (verifyRes.data.success) {
+                            clearCart();
+                            navigate('/order-success');
+                        } else {
+                            setError('Payment verification failed. Please contact support.');
+                        }
+                    } catch (err) {
+                        console.error('Payment callback error:', err);
+                        setError('An error occurred during payment verification.');
+                    }
+                },
+                prefill: {
+                    name: formData.fullName,
+                    email: user.email,
+                    contact: formData.phone
+                },
+                notes: {
+                    address: formData.address
+                },
+                theme: {
+                    color: '#000000'
+                }
             };
 
-            await api.post('/orders', orderData);
-            clearCart();
-            navigate('/order-success');
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+
         } catch (err) {
-            setError(err.response?.data?.message || 'Failed to place order. Please try again.');
+            console.error('Checkout error:', err);
+            setError(err.response?.data?.message || 'Failed to initialize payment. Please try again.');
         } finally {
             setLoading(false);
         }

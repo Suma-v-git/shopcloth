@@ -47,8 +47,12 @@ router.post('/signup', async (req, res) => {
             });
         }
 
-        // Create new user
-        const userData = { name, password };
+        // Create new user - Strictly enforce 'user' role
+        const userData = {
+            name,
+            password,
+            role: 'user' // Hardcode role to prevent injection
+        };
         if (email) userData.email = email;
         if (phone) userData.phone = phone;
 

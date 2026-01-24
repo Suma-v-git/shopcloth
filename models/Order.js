@@ -44,6 +44,18 @@ const orderSchema = new mongoose.Schema({
         zipCode: String,
         phone: String
     },
+    paymentInfo: {
+        razorpayOrderId: String,
+        razorpayPaymentId: String,
+        razorpaySignature: String,
+    },
+    isPaid: {
+        type: Boolean,
+        default: false
+    },
+    paidAt: {
+        type: Date
+    },
     createdAt: {
         type: Date,
         default: Date.now

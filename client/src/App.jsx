@@ -15,6 +15,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Profile from './pages/Profile';
 import OrderDetails from './pages/OrderDetails';
+import OrderSuccess from './pages/OrderSuccess';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -60,6 +61,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <Checkout />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/order-success"
+                  element={
+                    <ProtectedRoute>
+                      <OrderSuccess />
                     </ProtectedRoute>
                   }
                 />
