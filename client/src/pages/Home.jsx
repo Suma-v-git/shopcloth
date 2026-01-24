@@ -28,7 +28,12 @@ const Home = () => {
         // Load recent searches on mount
         const savedRecents = localStorage.getItem('recentSearches');
         if (savedRecents) {
-            setRecentSearches(JSON.parse(savedRecents));
+            try {
+                const parsedRecents = JSON.parse(savedRecents);
+                setRecentSearches(Array.isArray(parsedRecents) ? parsedRecents : []);
+            } catch (e) {
+                setRecentSearches([]);
+            }
         }
 
         // Click outside handler
@@ -85,7 +90,8 @@ const Home = () => {
             if (priceRange.max) params.maxPrice = priceRange.max;
 
             const response = await api.get('/products', { params });
-            setProducts(response.data.products);
+            const data = response.data?.products || [];
+            setProducts(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching products:', error);
         } finally {

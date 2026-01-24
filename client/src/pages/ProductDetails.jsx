@@ -28,7 +28,7 @@ const ProductDetails = () => {
         try {
             const response = await api.get(`/products/${id}`);
             setProduct(response.data.product);
-            if (response.data.product.sizes.length > 0) {
+            if (response.data.product?.sizes?.length > 0) {
                 setSelectedSize(response.data.product.sizes[0]);
             }
         } catch (error) {
@@ -50,11 +50,15 @@ const ProductDetails = () => {
     };
 
     const handlePrevImage = () => {
-        setSelectedImage((prev) => (prev === 0 ? product.images.length - 1 : prev - 1));
+        const len = product?.images?.length || 0;
+        if (len === 0) return;
+        setSelectedImage((prev) => (prev === 0 ? len - 1 : prev - 1));
     };
 
     const handleNextImage = () => {
-        setSelectedImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1));
+        const len = product?.images?.length || 0;
+        if (len === 0) return;
+        setSelectedImage((prev) => (prev === len - 1 ? 0 : prev + 1));
     };
 
     const handleShareClick = async () => {
@@ -132,9 +136,9 @@ const ProductDetails = () => {
                             {product.originalPrice && product.originalPrice > product.price && (
                                 <span className="sale-badge">Sale</span>
                             )}
-                            <img src={product.images[selectedImage]} alt={product.name} />
+                            {product.images?.[selectedImage] && <img src={product.images[selectedImage]} alt={product.name} />}
 
-                            {product.images.length > 1 && (
+                            {product.images?.length > 1 && (
                                 <>
                                     <button className="slider-btn prev" onClick={handlePrevImage}>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>

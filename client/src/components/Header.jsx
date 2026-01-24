@@ -48,7 +48,7 @@ const Header = () => {
                                     className="nav-link user-menu-btn"
                                     onClick={() => setDropdownOpen(!dropdownOpen)}
                                 >
-                                    <span>Hi, {user.name.split(' ')[0]}</span>
+                                    <span>Hi, {user?.name ? user.name.split(' ')[0] : 'User'}</span>
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <polyline points="6 9 12 15 18 9"></polyline>
                                     </svg>

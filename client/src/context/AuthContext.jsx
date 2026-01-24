@@ -25,10 +25,22 @@ export const AuthProvider = ({ children }) => {
 
         if (token && savedUser) {
             try {
-                const response = await api.get('/auth/verify');
-                setUser(response.data.user);
+                // Safely parse user data
+                const parsedUser = JSON.parse(savedUser);
+                if (parsedUser && typeof parsedUser === 'object') {
+                    setUser(parsedUser);
+
+                    // Verify with backend
+                    const response = await api.get('/auth/verify');
+                    if (response.data?.user) {
+                        setUser(response.data.user);
+                        localStorage.setItem('user', JSON.stringify(response.data.user));
+                    }
+                } else {
+                    logout();
+                }
             } catch (error) {
-                console.error('Auth verification failed:', error);
+                console.error('Auth verification failed or malformed user data:', error);
                 logout();
             }
         }

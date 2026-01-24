@@ -14,9 +14,19 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
-            setCart(JSON.parse(savedCart));
+        try {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                const parsedCart = JSON.parse(savedCart);
+                if (Array.isArray(parsedCart)) {
+                    setCart(parsedCart);
+                } else {
+                    setCart([]);
+                }
+            }
+        } catch (error) {
+            console.error('Failed to parse cart from localStorage:', error);
+            setCart([]);
         }
     }, []);
 
